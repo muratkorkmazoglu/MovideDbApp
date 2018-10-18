@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MovieDbApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="overview">As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.</string>
+
+
+    <string name="imagePath">http://image.tmdb.org/t/p/w185</string>
+    <string name="actionbar_title">Best Movies</string>
+    <string name="apiKey">1bbc6426551defae32aa6d680e28581a</string>
+    <string name="sortBy">popularity.desc</string>
+    <string name="moviesFragment">moviesFragment</string>
+
+</resources>
