@@ -56,8 +56,6 @@ public class DiscoverFragment extends Fragment implements ApiListener {
     private ArrayList<DiscoverModel.Result> modelList;
     private DiscoverAdapter discoverAdapter;
     private int page = 1;
-    private String LIST_INSTANCE_STATE = "listState";
-    Parcelable mListInstanceStateList,mListInstanceStateGrid;
 
     //---------For GridView Layout------------
     private ViewStub stubGrid;
@@ -81,7 +79,9 @@ public class DiscoverFragment extends Fragment implements ApiListener {
 
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
         ButterKnife.bind(this, view);
+
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.actionbar_title));
+
 
         return view;
     }
@@ -102,14 +102,6 @@ public class DiscoverFragment extends Fragment implements ApiListener {
         modelList = new ArrayList<>();
         Call<DiscoverModel> call = retroInterface.getDiscover(getString(R.string.apiKey), getString(R.string.sortBy), page);
         ApiResponse.callRetrofit(call, ApiName.getDiscoverCall, getContext(), this);
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mListInstanceStateList = listView.onSaveInstanceState();
-        mListInstanceStateGrid = gridView.onSaveInstanceState();
 
     }
 
@@ -167,10 +159,6 @@ public class DiscoverFragment extends Fragment implements ApiListener {
 
             }
         });
-        if (mListInstanceStateList != null)
-            listView.onRestoreInstanceState(mListInstanceStateList);
-        if (mListInstanceStateGrid != null)
-            gridView.onRestoreInstanceState(mListInstanceStateGrid);
 
     }
 
@@ -215,7 +203,6 @@ public class DiscoverFragment extends Fragment implements ApiListener {
             //Hide gridview
             stubGrid.setVisibility(View.GONE);
 
-
         } else if (VIEW_MODE_GRIDVIEW == currentViewMode) {
             //Hide listview
             stubList.setVisibility(View.GONE);
@@ -258,7 +245,6 @@ public class DiscoverFragment extends Fragment implements ApiListener {
             } else {
                 discoverAdapter = new DiscoverAdapter(getActivity(), modelList);
                 listView.setAdapter(discoverAdapter);
-
             }
 
             discoverAdapter.notifyDataSetChanged();
@@ -266,12 +252,12 @@ public class DiscoverFragment extends Fragment implements ApiListener {
         } else if (VIEW_MODE_GRIDVIEW == currentViewMode) {
 
             if (gridView.getAdapter() != null) {
+
                 gridViewAdapter = (GridViewAdapter) gridView.getAdapter();
 
             } else {
                 gridViewAdapter = new GridViewAdapter(getContext(), modelList);
                 gridView.setAdapter(gridViewAdapter);
-
 
             }
             gridViewAdapter.notifyDataSetChanged();
